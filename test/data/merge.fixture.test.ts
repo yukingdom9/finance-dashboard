@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { loadFixture } from '../fixtures/loadFixture';
+import { loadFixture, FIXTURE_AVAILABLE } from '../fixtures/loadFixture';
 import { mergeRows } from '../../src/data/merge';
 import type { Transaction } from '../../src/types/transaction';
 
@@ -8,8 +8,15 @@ const byDate = (a: Transaction, b: Transaction) => (a.date < b.date ? -1 : a.dat
 /**
  * design/fixtures/README.md「派生ファイルの作り方」の期待値をそのまま検証する。
  * 実データではなく、fixtureから年で分割した部分集合を使って data/merge.ts の算術を確認する。
+ *
+ * design/ は公開リポジトリに含めていないため、CI環境等では存在せずスキップする。
  */
 describe('mergeRows（fixtureの年別分割シナリオ）', () => {
+  if (!FIXTURE_AVAILABLE) {
+    it.skip('design/fixtures/anonymized-real-data.csv が無い環境（CI等）のためスキップ', () => {});
+    return;
+  }
+
   const { rows } = loadFixture();
   const by2024 = rows.filter((t) => t.y === 2024).sort(byDate);
   const by2025 = rows.filter((t) => t.y === 2025).sort(byDate);

@@ -7,3 +7,6 @@ dist/
 # （design/fixtures/README.md 参照）。手元では引き続き参照できる。
 /design/
 /wireframe/
+
+# Claude Code のセッション内部ファイル（プロジェクト成果物ではない）
+/.claude/

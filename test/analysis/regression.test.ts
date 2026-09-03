@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { loadFixture } from '../fixtures/loadFixture';
+import { loadFixture, FIXTURE_AVAILABLE } from '../fixtures/loadFixture';
 import { buildIndex } from '../../src/analysis/index';
 import { emptyAliasMap } from '../../src/types/dataset';
 import { yearAgg } from '../../src/analysis/aggregate';
@@ -7,8 +7,16 @@ import { yearAgg } from '../../src/analysis/aggregate';
 /**
  * design/fixtures/anonymized-real-data.csv を固定入力とした回帰テスト。
  * 期待値は design/architecture.md §13 および design/fixtures/README.md に記載の実測値。
+ *
+ * design/ は実データ由来の金額・日付を含むため公開リポジトリ（GitHub Pages用）には含めていない。
+ * ローカル開発環境にはあるが、CI環境には無いため、その場合はスキップする。
  */
 describe('fixture回帰テスト（design/fixtures/anonymized-real-data.csv）', () => {
+  if (!FIXTURE_AVAILABLE) {
+    it.skip('design/fixtures/anonymized-real-data.csv が無い環境（CI等）のためスキップ', () => {});
+    return;
+  }
+
   const { rows, skipped } = loadFixture();
   const idx = buildIndex(rows, emptyAliasMap());
 

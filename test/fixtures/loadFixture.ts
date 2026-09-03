@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { decodeCSV } from '../../src/data/decode';
@@ -8,6 +8,13 @@ import type { Transaction } from '../../src/types/transaction';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const FIXTURE_PATH = path.resolve(__dirname, '../../design/fixtures/anonymized-real-data.csv');
+
+/**
+ * design/ は実データ由来の金額・日付を含むため公開リポジトリには含めていない（.gitignore参照）。
+ * ローカルの開発環境にはあるが、CI（GitHub Actions）のチェックアウトには存在しない。
+ * このファイルが無い環境では、依存するテストを describe.skipIf などで丸ごとスキップすること。
+ */
+export const FIXTURE_AVAILABLE = existsSync(FIXTURE_PATH);
 
 export interface FixtureLoadResult {
   rows: Transaction[];
