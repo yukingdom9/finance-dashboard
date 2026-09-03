@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+
+# 設計資料には実データ由来の金額・日付が含まれるため、公開リポジトリには含めない
+# （design/fixtures/README.md 参照）。手元では引き続き参照できる。
+/design/
+/wireframe/

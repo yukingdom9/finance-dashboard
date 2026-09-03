@@ -1,0 +1,41 @@
+/*
+ * デザイントークン（ui-spec.md 第2部）。
+ *
+ * フォントについての実装判断（architecture.md §2「本番実装時に再検討すべき箇所」#3）：
+ * ワイヤーフレームは IBM Plex Sans を Google Fonts から外部読み込みしていたが、
+ * architecture.md 制約2「外部通信を一切行わない」に反するため本番では使えない。
+ * ラテン文字のサブセット同梱が推奨されているが、フォントファイルの用意・同梱パイプラインは
+ * このフェーズの範囲外と判断し、v1ではシステムフォントスタックに置き換える。
+ * font-variant-numeric: tabular-nums はシステムフォントでも多くが対応しており、
+ * 桁の等幅性という可読性上の要件は最低限満たせる。将来フォントを同梱する場合は
+ * このファイルの --num の定義を差し替えるだけで済むよう、依存箇所を集約している。
+ */
+:root {
+  --ink: #131c26;
+  --ink-2: #22303e;
+  --ink-3: #4b5d6e;
+  --ink-4: #7a8b9a;
+
+  --paper: #f2f4f7;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+
+  --line: #dce1e8;
+  --line-strong: #b9c3ce;
+
+  --up: #8149be;
+  --up-soft: #f1e9fb;
+  --down: #0f8c84;
+  --down-soft: #def1ef;
+
+  --flag: #d07e28;
+  --flag-soft: #fceedc;
+
+  --focus: #4a7cb8;
+
+  --r: 3px;
+
+  --num: -apple-system, 'Segoe UI', 'IBM Plex Sans', sans-serif;
+  --jp: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic Medium', 'Yu Gothic', 'Noto Sans JP', 'Meiryo',
+    sans-serif;
+}
