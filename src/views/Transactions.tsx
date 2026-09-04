@@ -45,9 +45,9 @@ export function Transactions() {
       key: 'name',
       header: '内容',
       render: (t) => (
-        <span className="trunc">
-          {t.name}
-          {idx.anomalyIds.has(t.id) && <span className="chip flag" style={{ marginLeft: 6 }}>目立つ支出</span>}
+        <span className="tdflex">
+          <span className="trunc">{t.name}</span>
+          {idx.anomalyIds.has(t.id) && <span className="chip flag">目立つ支出</span>}
         </span>
       ),
       sortable: true,
